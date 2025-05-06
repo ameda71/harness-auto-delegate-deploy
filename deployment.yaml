@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: calculator-app
-        image: saicharan12121/haress_push:latest
+        image: saiteja562/e2edocker:latest
         ports:
         - containerPort: 8085
         # env:
