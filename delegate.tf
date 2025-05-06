@@ -1,7 +1,6 @@
 # 1. Fetch GCP client credentials
 data "google_client_config" "default" {}
 
-# 2. Create GKE Cluster
 resource "google_container_cluster" "primary" {
   name     = var.cluster_name
   location = var.region
@@ -15,6 +14,7 @@ resource "google_container_cluster" "primary" {
 
   remove_default_node_pool = false
 }
+
 
 # 3. Get cluster details after creation
 data "google_container_cluster" "gke_cluster" {
