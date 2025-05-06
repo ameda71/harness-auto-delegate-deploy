@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: calculator-app
-        image: saiteja562/e2edocker:latest
+        image: saiteja562/e2esai:latest
         ports:
         - containerPort: 8085
         # env:
