@@ -1,36 +1,21 @@
 # 1. Fetch GCP client credentials
 data "google_client_config" "default" {}
 
-resource "google_container_cluster" "primary" {
-  name     = var.cluster_name
-  location = var.region
-  deletion_protection = false
-  initial_node_count = var.node_count
-
-  node_config {
-    machine_type = var.node_machine_type
-    disk_size_gb = 20
-  }
-
-  remove_default_node_pool = false
-}
-
-
-# 3. Get cluster details after creation
+# 2. Get cluster details from the already-created cluster
 data "google_container_cluster" "gke_cluster" {
-  name     = google_container_cluster.primary.name
-  location = google_container_cluster.primary.location
+  name       = google_container_cluster.primary.name
+  location   = google_container_cluster.primary.location
   depends_on = [google_container_cluster.primary]
 }
 
-# 4. Kubernetes Provider using GKE credentials
+# 3. Kubernetes provider to connect to GKE
 provider "kubernetes" {
   host                   = "https://${data.google_container_cluster.gke_cluster.endpoint}"
   token                  = data.google_client_config.default.access_token
   cluster_ca_certificate = base64decode(data.google_container_cluster.gke_cluster.master_auth[0].cluster_ca_certificate)
 }
 
-# 5. Helm Provider using the same credentials
+# 4. Helm provider
 provider "helm" {
   kubernetes {
     host                   = "https://${data.google_container_cluster.gke_cluster.endpoint}"
@@ -39,9 +24,9 @@ provider "helm" {
   }
 }
 
-# 6. Harness Delegate Module Deployment
+# 5. Harness Delegate Deployment
 module "delegate" {
-  source = "harness/harness-delegate/kubernetes"
+  source  = "harness/harness-delegate/kubernetes"
   version = "0.1.8"
 
   account_id       = "ucHySz2jQKKWQweZdXyCog"
