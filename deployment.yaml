@@ -16,7 +16,7 @@ spec:
       - name: calculator-app
         image: saiteja562/e2edocker:latest
         ports:
-        - containerPort: 8081
+        - containerPort: 8085
         # env:
         # - name: SPRING_PROFILES_ACTIVE
         #   value: "prod"
@@ -32,5 +32,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8081
+      targetPort: 8085
   type: LoadBalancer  # If using a cloud provider, otherwise use ClusterIP
