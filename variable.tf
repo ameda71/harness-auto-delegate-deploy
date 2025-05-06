@@ -13,7 +13,7 @@ variable "region" {
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster"
   type        = string
-  default     = "my-cluster11" 
+  default     = "harness-delegate-cluster" 
 }
 
 variable "node_count" {
