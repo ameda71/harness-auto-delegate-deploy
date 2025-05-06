@@ -29,7 +29,7 @@ module "delegate" {
 
   account_id = "ucHySz2jQKKWQweZdXyCog"
   delegate_token = "NTRhYTY0Mjg3NThkNjBiNjMzNzhjOGQyNjEwOTQyZjY="
-  delegate_name = "terraform-delegate-saiteja"
+  delegate_name = "terraform-delegate-teja"
   deploy_mode = "KUBERNETES"
   namespace = "harness-delegate-ng"
   manager_endpoint = "https://app.harness.io"
@@ -37,5 +37,4 @@ module "delegate" {
   replicas = 1
   upgrader_enabled = true
 }
-
 
